@@ -12,10 +12,30 @@ namespace FreeGaugesDemo
 {
     public partial class Form1 : Form
     {
+        double sinX = 0;
+        Timer t = new Timer { Interval = 1, Enabled = true };
         public Form1()
         {
             InitializeComponent();
+            t.Tick += (sender, e) => ModifyGaugeValue();
         }
+
+        void ModifyGaugeValue()
+        {
+            sinX += 0.01;
+            double sinY = Math.Sin(sinX) / 2 + 0.5;
+            double value = sinY * (double)circularGauge1.MaxValue + (double)circularGauge1.MinValue;
+
+            lblValue.Text = "Value: " + (int)value;
+            circularGauge1.Value = (int)value;
+            circularGauge2.Value = (int)value;
+            circularGauge3.Value = (int)value;
+            circularGauge4.Value = (int)value;
+            circularGauge5.Value = (int)value;
+            circularGauge6.Value = (int)value;
+            circularGauge7.Value = (int)value;
+        }
+
     }
 
     public partial class CircularGauge : Control
